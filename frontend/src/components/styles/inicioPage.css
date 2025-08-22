@@ -1,0 +1,139 @@
+:root {
+    --line: #b6c2d1;
+    /* líneas y bordes */
+    --bg: #cde6ff;
+    /* fondo general */
+    --panel: #f5f5f5;
+    /* tarjetas */
+    --ink: #0f172a;
+    /* texto */
+    --muted: #475569;
+    /* texto secundario */
+    --primary: #2b6cb0;
+    /* acento */
+}
+
+* {
+    box-sizing: border-box
+}
+
+body,
+html,
+#root {
+    height: 100%
+}
+
+.page {
+    min-height: 100vh;
+    background: var(--bg);
+    color: var(--ink);
+    border: 2px solid var(--line);
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    border: 2px solid var(--line);
+    background: var(--panel);
+}
+
+.logo {
+    width: 126px;
+    height: 120px;
+    border: 2px solid var(--line);
+    background:
+        repeating-linear-gradient(#327feb 0 8px);
+}
+
+.title {
+    font-size: 1.35rem;
+    font-weight: 800;
+    margin: 0;
+}
+
+.body {
+    display: flex;
+    gap: 16px;
+    margin-top: 12px;
+}
+
+.sidebar {
+    width: 200px;
+    flex: 0 0 140px;
+    border: 2px solid var(--line);
+    background: var(--panel);
+    padding: 12px;
+    display: flex;
+    justify-content: center;
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%
+}
+
+.menu-btn {
+    width: 100%;
+    padding: 10px 12px;
+    border: 2px solid var(--line);
+    border-radius: 6px;
+    background: #eef2f7;
+    font-weight: 600;
+    color: #1f2937;
+    cursor: pointer;
+    transition: transform .06s ease, background .2s ease;
+}
+
+.menu-btn:hover {
+    background: #87a6d8;
+    transform: translateY(-1px)
+}
+
+.menu-btn:active {
+    transform: translateY(0) scale(.99)
+}
+
+.main {
+    display: grid;
+    gap: 0;
+
+    grid-template-columns: 1fr 430px 430px;
+    border: 2px ;
+    background: var(--panel);
+}
+
+.content {
+    border-right: 2px solid var(--line);
+
+    padding: 40px;
+}
+
+.panel {
+    border-right: 2px solid var(--line);
+    padding: 50px;
+    min-height: 220px;
+}
+
+.footer {
+    background: rgb(134, 134, 255);
+    display: flex;
+    padding: 7%;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.image-content{
+    width: 355px;
+    height:280px;
+    align-content: center;
+    display: block;        
+    margin: 0 auto
+}
+
+
+
+
+
