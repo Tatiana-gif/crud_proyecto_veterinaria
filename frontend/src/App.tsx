@@ -6,6 +6,7 @@ import PersonasPage from "./components/personaPage";
 import UsuariosPage from "./components/usuarioPage";
 import AdministradoresPage from "./components/administradoresPage";
 import LoginPage from "./components/loginForm";
+import HomePetsGarras from "./components/inicioPage";
 
 function RequireAuth() {
   const token = localStorage.getItem("token");
@@ -26,7 +27,7 @@ export default function App() {
 
             {/* Rutas protegidas */}
             <Route element={<RequireAuth />}>
-              <Route path="/home" element={<HomePage />} />
+              <Route path="/home" element={<HomePetsGarras/>} />
               <Route path="/cargos" element={<CargosPage />} />
               <Route path="/personas" element={<PersonasPage />} />
               <Route path="/usuarios" element={<UsuariosPage />} />

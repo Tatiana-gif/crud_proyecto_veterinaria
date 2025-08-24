@@ -4,7 +4,7 @@ import image from '../assets/R (2).jpeg';
 import { Link, useNavigate } from "react-router-dom"; // ← useNavigate
 import api from "../services/api";  
 import logo from '../assets/logo.png'
-                    // ← para limpiar el header auth
+                   
 
 export default function HomePetsGarras(): JSX.Element {
   const navigate = useNavigate();
