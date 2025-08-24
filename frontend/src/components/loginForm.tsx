@@ -1,88 +1,124 @@
-import React, { useState } from "react";
-import { api } from "../services/api";
-import '../components/styles/loginForm.css'
-interface LoginFormProps {
-  onLoginSuccess: (token: string) => void;
-}
+import { useEffect, useState } from "react";
+import { useNavigate, useLocation} from "react-router-dom";
+import api from "../services/api";
+import "../components/styles/loginForm.css";   
+import logo from '../assets/logo.png' 
 
-const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess }) => {
-  const [usuario, setUsuario] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
-  const [error, setError] = useState<string>("");
+export default function LoginForm() {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPw, setShowPw] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [err, setErr] = useState<string | null>(null);
+  const navigate = useNavigate();
+  const location = useLocation() as any;
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  useEffect(() => {
+    if (location?.state?.prefillUser) setUsername(location.state.prefillUser);
+  }, [location?.state?.prefillUser]);
+
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setErr(null);
+
+    const u = username.trim();
+    const p = password.trim();
+    if (!u || !p) return setErr("Usuario y contraseña son obligatorios.");
+
     try {
-      const response = await api.post<{ access_token: string }>("/login", {
-        usuario,
-        password,
+      setLoading(true);
+      const body = new URLSearchParams();
+      body.append("username", u);
+      body.append("password", p);
+
+      const { data } = await api.post("/login", body, {
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
       });
 
-      onLoginSuccess(response.data.access_token);
-    } catch (err) {
-      setError("⚠️ Credenciales inválidas, intenta de nuevo.");
+      localStorage.setItem("token", data.access_token);
+      navigate("/home", { replace: true });
+    } catch (e: any) {
+      setErr(e?.response?.data?.detail || "Credenciales inválidas");
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div className="flex justify-center items-center h-screen bg-gradient-to-r from-blue-200 to-blue-400">
-      <div className="container">
-      <form
-        onSubmit={handleSubmit}
-        className="bg-white p-8 rounded-2xl shadow-xl w-96 transform transition-all hover:scale-105"
-      >
-        <h2 className="text-3xl font-bold text-center mb-6 text-blue-700">
-          Iniciar Sesión
-        </h2>
+    <div className="page">
+      <header className="header">
+        <img src={logo} className="logo" />
+        <h1 className="title">Tienda de productos para mascotas Garras</h1>
+      </header>
 
-        {error && (
-          <p className="text-red-500 text-sm mb-4 text-center font-medium">
-            {error}
-          </p>
-        )}
+      <main className="main-login">
+        <div className="login-page">
+          <section className="login-card" aria-label="Iniciar sesión">
+            <header className="login-header">
+              <h1 className="login-title">Bienvenido</h1>
+              <p className="login-subtitle">Accede con tu cuenta</p>
+            </header>
 
-        <div className="mb-4">
-          <label className="block text-gray-600 mb-2 font-semibold">
-            Usuario
-          </label>
-          <input
-            type="text"
-            placeholder="Ingrese su usuario"
-            value={usuario}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              setUsuario(e.target.value)
-            }
-            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
-            required
-          />
+            <form className="login-form" onSubmit={onSubmit} noValidate>
+              <div className="form-row">
+                <label htmlFor="username" className="form-label">Usuario</label>
+                <input
+                  id="username"
+                  name="username"
+                  className="form-input"
+                  placeholder="tu_usuario"
+                  value={username}
+                  onChange={(e) => { setUsername(e.target.value); if (err) setErr(null); }}
+                  autoComplete="username"
+                  required
+                />
+              </div>
+
+              <div className="form-row">
+                <label htmlFor="password" className="form-label">Contraseña</label>
+                <div className="form-password">
+                  <input
+                    id="password"
+                    name="password"
+                    type={showPw ? "text" : "password"}
+                    className="form-input"
+                    placeholder="••••••••"
+                    value={password}
+                    onChange={(e) => { setPassword(e.target.value); if (err) setErr(null); }}
+                    autoComplete="current-password"
+                    required
+                  />
+                  <button
+                    type="button"
+                    className="btn-ghost"
+                    onClick={() => setShowPw(s => !s)}
+                    aria-label={showPw ? "Ocultar contraseña" : "Mostrar contraseña"}
+                  >
+                    {showPw ? "Ocultar" : "Mostrar"}
+                  </button>
+                </div>
+              </div>
+
+              {err && <div className="form-error" role="alert">{err}</div>}
+
+              <div className="form-actions">
+                <button className="btn-primary" type="submit" disabled={loading}>
+                  {loading ? "Ingresando..." : "Ingresar"}
+                </button>
+              </div>
+            </form>
+
+          </section>
         </div>
+      </main>
 
-        <div className="mb-6">
-          <label className="block text-gray-600 mb-2 font-semibold">
-            Contraseña
-          </label>
-          <input
-            type="password"
-            placeholder="Ingrese su contraseña"
-            value={password}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              setPassword(e.target.value)
-            }
-            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
-            required
-          />
-        </div>
-
-        <button
-          type="submit"
-          className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold shadow-md hover:bg-blue-700 hover:shadow-lg transition"
-        >
-          Ingresar
-        </button>
-      </form>
-      </div>
+      <footer className="footer">
+        <p className="contact">Contáctanos</p>
+        <a className="hyperlink" href="#" aria-label="Ir al enlace destacado">
+          <div className="link-box" aria-hidden />
+          <span className="link-text">Hyperlink</span>
+        </a>
+      </footer>
     </div>
   );
-};
-
-export default LoginForm;
+}

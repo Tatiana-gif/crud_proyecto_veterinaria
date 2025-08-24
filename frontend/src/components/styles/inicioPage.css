@@ -42,8 +42,6 @@ html,
     width: 126px;
     height: 120px;
     border: 2px solid var(--line);
-    background:
-        repeating-linear-gradient(#327feb 0 8px);
 }
 
 .title {
@@ -107,7 +105,6 @@ html,
 
 .content {
     border-right: 2px solid var(--line);
-
     padding: 40px;
 }
 
@@ -117,12 +114,14 @@ html,
     min-height: 220px;
 }
 
-.footer {
-    background: rgb(134, 134, 255);
-    display: flex;
-    padding: 7%;
-    justify-content: space-between;
-    width: 100%;
+.footer{
+  background: rgb(131, 131, 252);
+  display: flex;
+  align-items: center;           /* centra verticalmente el contenido */
+  justify-content: space-between;
+  padding: 40px 24px;            /* antes 12% */
+  width: 100%;
+  color:white
 }
 
 .image-content{

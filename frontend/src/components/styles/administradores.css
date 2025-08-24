@@ -1,0 +1,41 @@
+
+.card-body {
+  overflow: visible !important;
+  width: 100%;
+  max-width: 1400px; /* Define un límite máximo */
+  min-width: 900px;  /* Define un límite mínimo */
+}
+
+.main{
+    width: 50px;
+    
+}
+.table-wrap{
+  overflow: visible !important;   
+  padding: 23px;
+}
+
+.table thead th{
+  background: #a9c0ff !important;
+  color: #0f172a !important;
+  font-weight: 700 !important;
+  font-size: .95rem !important;
+  padding: 12px 14px !important;
+  text-align: left !important;
+  border-bottom: 1px solid #dbe3ff !important;
+  white-space: nowrap;
+}
+.table thead th:first-child{ border-top-left-radius: 10px; }
+.table thead th:last-child { border-top-right-radius: 10px; text-align: center; }
+
+.footer-admin{
+  background: rgb(166,166,255);
+  display: flex;
+  align-items: center;           /* centra verticalmente el contenido */
+  justify-content: space-between;
+  padding: 40px 24px;            /* antes 12% */
+  width: 100%;
+  color:white
+
+}
+

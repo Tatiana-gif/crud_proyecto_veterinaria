@@ -3,7 +3,6 @@ from sqlalchemy.orm import sessionmaker, declarative_base
 
 DATABASE_URL = "mysql+pymysql://root:admin@localhost:3306/garras"
 
-# Crear el engine sin connect_args (esto es solo para SQLite)
 engine = create_engine(DATABASE_URL, echo=True, future=True)
 
 # Crear la sesión

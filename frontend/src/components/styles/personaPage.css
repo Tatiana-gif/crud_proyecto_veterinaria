@@ -23,16 +23,16 @@ html, body, #root {
     color: var(--ink);
 }
 
-.page {
+.personas-page {
     height: 100%;
     width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: space-between; 
+    justify-content: space-between;
     border: 2px solid var(--line);
 }
 
-.header {
+.personas-header {
     display: flex;
     align-items: center;
     gap: 40px;
@@ -41,24 +41,23 @@ html, body, #root {
     background: var(--panel);
 }
 
-.logo {
+.personas-logo {
     width: 126px;
     height: 120px;
     border: 2px solid var(--line);
-    background: repeating-linear-gradient(#065fd3 0 8px);
 }
 
-.title {
+.personas-title {
     font-size: 1.35rem;
     font-weight: 800;
 }
 
-.tabs {
+.personas-tabs {
     display: flex;
     border-bottom: 2px solid var(--line);
 }
 
-.tab {
+.personas-tab {
     padding: 10px 14px;
     border: 2px solid var(--line);
     border-right: none;
@@ -68,24 +67,24 @@ html, body, #root {
     font-weight: 600;
 }
 
-.tab:first-child {
+.personas-tab:first-child {
     border-top-left-radius: 6px;
     border-bottom-left-radius: 6px;
 }
 
-.tab:last-child {
+.personas-tab:last-child {
     border-right: 2px solid var(--line);
     border-top-right-radius: 6px;
     border-bottom-right-radius: 6px;
 }
 
-.tab.active {
+.personas-tab.active {
     background: var(--active);
     color: #111827;
 }
 
-.card {
-    flex: 1; 
+.personas-card {
+    flex: 1;
     margin: 10px;
     border: 2px solid var(--line);
     background: var(--panel);
@@ -93,20 +92,20 @@ html, body, #root {
     flex-direction: column;
 }
 
-.card-header {
+.personas-card-header {
     padding: 10px 14px;
     font-weight: 700;
     color: var(--muted);
     border-bottom: 2px solid var(--line);
 }
 
-.card-body {
-    flex: 1; 
+.personas-card-body {
+    flex: 1;
     padding: 16px;
-    overflow-y: auto; 
+    overflow-y: auto;
 }
 
-.table-wrap {
+.personas-table-wrap {
     width: 100%;
     height: 100%;
     border: 2px solid var(--line);
@@ -116,28 +115,29 @@ html, body, #root {
     overflow: auto;
 }
 
-.table {
+.personas-table {
     width: 100%;
     border-collapse: collapse;
 }
 
-.table th, .table td {
+.personas-table th,
+.personas-table td {
     text-align: left;
     padding: 10px 12px;
     border-bottom: 1px solid #e5e7eb;
 }
 
-.table thead th {
+.personas-table thead th {
     font-size: .9rem;
     color: #374151;
     background: #9cbff8;
 }
 
-.table tbody tr:hover {
+.personas-table tbody tr:hover {
     background: #f8fafc;
 }
 
-.footer {
+.personas-footer {
     border-top: 2px solid var(--line);
     background: rgb(134, 134, 255);
     display: flex;
@@ -147,11 +147,11 @@ html, body, #root {
     color: white;
 }
 
-.contact {
+.personas-contact {
     font-weight: 600;
 }
 
-.hyperlink {
+.personas-hyperlink {
     display: flex;
     align-items: center;
     text-decoration: none;
@@ -159,13 +159,57 @@ html, body, #root {
     gap: 6px;
 }
 
-.link-box {
+.personas-link-box {
     width: 24px;
     height: 24px;
     background-color: rgba(255, 255, 255, 0.3);
     border-radius: 4px;
 }
 
-.link-text {
+.personas-link-text {
     font-weight: 500;
+}
+
+.button{
+  display:inline-flex; align-items:center; justify-content:center;
+  padding:8px 12px;
+  border-radius:10px;
+  border:1px solid var(--border, #e5e7eb);
+  background:#ec1515;
+  color:#111827;
+  cursor:pointer;
+  transition: background .2s, box-shadow .2s, transform .02s, border-color .2s;
+  font-weight:600;
+}
+.button:hover{ background:#f8faff; }
+.button:active{ transform: translateY(1px); }
+
+/* Botón rojo “eliminar” */
+.button-danger{
+  background:#ef4444;
+  border-color:#ef4444;
+  color:#fff;
+  box-shadow:0 8px 16px rgba(239,68,68,.25);
+}
+.button-danger:hover{ background:#dc2626; border-color:#dc2626; }
+
+.personas-table td:last-child{ white-space:nowrap; }
+
+.personas-page{
+  min-height: 100vh;         
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.personas-main{
+  flex: 1 1 auto;
+}
+.personas-footer{
+  background: rgb(135, 135, 241);
+  display: flex;
+  align-items: center;           /* centra verticalmente el contenido */
+  justify-content: space-between;
+  padding: 40px 24px;            /* antes 12% */
+  width: 100%;
 }
